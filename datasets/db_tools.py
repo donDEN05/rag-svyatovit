@@ -35,6 +35,8 @@ class Tools():
         with open(csv_path, encoding='utf-8') as f:
             self.cursor.copy_from(f, table_name, sep=',', null='')
         
+        self.conn.commit()
+
         return print('Done fill')
     
 
@@ -47,4 +49,5 @@ class Tools():
 
 t = Tools()
 t.connect()
+t.fill()
 t.close()
