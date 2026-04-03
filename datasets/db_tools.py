@@ -46,8 +46,3 @@ class Tools():
 
         return print('Closed')
 
-
-t = Tools()
-t.connect()
-t.fill()
-t.close()

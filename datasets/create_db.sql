@@ -1,4 +1,3 @@
--- Таблица организаций для RAG-агента по финансовым отчётностям
 CREATE TABLE IF NOT EXISTS organizations (
     id SERIAL PRIMARY KEY,
 
@@ -30,7 +29,6 @@ CREATE TABLE IF NOT EXISTS organizations (
     geocoding_quality VARCHAR(20)
 );
 
--- Комментарии к таблице и столбцам
 COMMENT ON TABLE organizations IS 'Справочник организаций для финансового RAG-агента (данные по юридическим лицам)';
 COMMENT ON COLUMN organizations.inn IS 'ИНН (идентификационный номер налогоплательщика)';
 COMMENT ON COLUMN organizations.ogrn IS 'ОГРН (основной государственный регистрационный номер)';
