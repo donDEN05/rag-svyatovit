@@ -1,9 +1,6 @@
-import sys
-import os
 from langchain_core.prompts import (
     ChatPromptTemplate,
-    FewShotChatMessagePromptTemplate,
-    MessagesPlaceholder
+    FewShotChatMessagePromptTemplate
 )
 
 

@@ -1,1 +1,1 @@
-psycopg2 pandas transformers
+sys.path.append(os.path.join(os.path.dirname(__file__), '..', 'datasets'))
