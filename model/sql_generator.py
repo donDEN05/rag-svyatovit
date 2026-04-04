@@ -9,7 +9,7 @@ class SQL_gen():
         self.model = None
         self.config = None
 
-
+    @classmethod
     def connect_model(self,
                       model_name='cssupport/t5-small-awesome-text-to-sql',
                       cache_dir='model/weights',
@@ -23,10 +23,10 @@ class SQL_gen():
 
         return print('Done connect model')
     
-
+    @classmethod
     def generate_sql(self,
                      input_text,
-                     max_new_tokens=512,
+                     max_new_tokens=None,
                     
                      ):
         
