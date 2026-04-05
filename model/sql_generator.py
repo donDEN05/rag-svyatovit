@@ -9,7 +9,7 @@ class SQL_gen():
         self.model = None
         self.config = None
 
-    @classmethod
+
     def connect_model(self,
                       model_name='cssupport/t5-small-awesome-text-to-sql',
                       cache_dir='model/weights',
@@ -21,13 +21,14 @@ class SQL_gen():
                       cache_dir=cache_dir,
                       device_map=device_map)
 
-        return print('Done connect model')
+        return print('Done connect sql model')
     
-    @classmethod
+
     def generate_sql(self,
                      input_text,
                      max_new_tokens=None,
                      ):
+        self.connect_model()
         
         table = """CREATE TABLE organizations (
     id SERIAL PRIMARY KEY,
@@ -69,5 +70,6 @@ class SQL_gen():
                                       max_new_tokens=max_new_tokens,
                                       )
         
+        print('Sql generated')
         return self.tokenizer.decode(outputs[0], skip_special_tokens=True)
         

@@ -7,7 +7,7 @@ class TextTranslator():
         self.model = None
         self.config = None
 
-    @classmethod
+
     def connect_model(self, model_name='utrobinmv/t5_translate_en_ru_zh_small_1024',
                             cache_dir='model/weights',
                             device_map='auto'):
@@ -20,10 +20,11 @@ class TextTranslator():
                                                            cache_dir=cache_dir,
                                                            device_map=device_map
                                                            )
-        return print('Done connect model')
+        return print('Done connect model translator')
 
-    @classmethod
-    def translate_text(self, input_text, max_new_tokens=None):
+
+    def translate_text(self, input_text, max_new_tokens=100):
+        self.connect_model()
         input_text = 'translate to eng: ' + input_text
 
         inputs = self.tokenizer(input_text, 
@@ -31,4 +32,6 @@ class TextTranslator():
 
         outputs = self.model.generate(**inputs, 
                                       max_new_tokens=max_new_tokens)
+        
+        print('Done translation')
         return self.tokenizer.decode(outputs[0], skip_special_tokens=True)

@@ -8,8 +8,8 @@ class MakePrompt():
     def __init__(self):
         self.base = None
 
-    @classmethod
-    def make_prompt(self):
+
+    def make_prompt_calculations(self):
         
         example_prompt = ChatPromptTemplate.from_messages([
             ("human", "### Input Table:\n{table}\n### User Query:\n{query}"),

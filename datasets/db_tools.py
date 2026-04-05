@@ -6,7 +6,7 @@ class Tools():
         self.conn = None
         self.cursor = None
 
-    @classmethod
+
     def connect(self, host='localhost', port=5432, dbname='svyatovit', user='donden', password='3535'):
         self.conn = psycopg2.connect(
             host=host,
@@ -16,9 +16,9 @@ class Tools():
             password=password
         )
         self.cursor = self.conn.cursor()
-        return print('Done connect')
+        return print('Done connect db')
 
-    @classmethod
+
     def create(self, template_path='datasets/create_db.sql'):
         self.cursor = self.conn.cursor()
 
@@ -28,27 +28,33 @@ class Tools():
         
         self.conn.commit()
 
-        return print('Done create')
+        return print('Done create table')
     
-    @classmethod
+
     def fill(self, csv_path='datasets/data_to_fill.csv', table_name='organizations'):
         with open(csv_path, encoding='utf-8') as f:
             self.cursor.copy_from(f, table_name, sep=',', null='')
         
         self.conn.commit()
 
-        return print('Done fill')
+        return print('Done fill table')
     
-    @classmethod
+
     def execute(self, query):
         self.cursor.execute(query)
         data =  self.cursor.fetchall()
         return data
     
-    @classmethod
+
+    def column_names(self):
+        column_names = [desc.name for desc in self.cursor.description]
+
+        return column_names
+
+
     def close(self):
         self.conn.close()
         self.cursor.close()
 
-        return print('Closed')
+        return print('Tool Closed')
 
