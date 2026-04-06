@@ -23,15 +23,27 @@ class TextTranslator():
         return print('Done connect model translator')
 
 
-    def translate_text(self, input_text, max_new_tokens=100):
+    def translate_text_to_eng(self, input_text):
         self.connect_model()
         input_text = 'translate to eng: ' + input_text
 
         inputs = self.tokenizer(input_text, 
                                 return_tensors="pt").to('cuda')
 
-        outputs = self.model.generate(**inputs, 
-                                      max_new_tokens=max_new_tokens)
+        outputs = self.model.generate(**inputs)
+        
+        print('Done translation')
+        return self.tokenizer.decode(outputs[0], skip_special_tokens=True)
+
+    
+    def translate_text_to_ru(self, input_text):
+        self.connect_model()
+        input_text = 'translate to ru: ' + input_text
+
+        inputs = self.tokenizer(input_text, 
+                                return_tensors="pt").to('cuda')
+
+        outputs = self.model.generate(**inputs)
         
         print('Done translation')
         return self.tokenizer.decode(outputs[0], skip_special_tokens=True)

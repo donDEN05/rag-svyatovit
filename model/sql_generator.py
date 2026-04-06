@@ -24,7 +24,7 @@ class SQL_gen():
         return print('Done connect sql model')
     
 
-    def generate_sql(self,
+    def generate_sql_t5(self,
                      input_text,
                      max_new_tokens=None,
                      ):
@@ -72,4 +72,4 @@ class SQL_gen():
         
         print('Sql generated')
         return self.tokenizer.decode(outputs[0], skip_special_tokens=True)
-        
+    
