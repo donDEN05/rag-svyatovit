@@ -1,1 +1,1 @@
-sys.path.append(os.path.join(os.path.dirname(__file__), '..', 'datasets'))
+Бекенд готов, осталось обернуть в апишку.
