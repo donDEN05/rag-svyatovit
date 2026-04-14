@@ -1,7 +1,6 @@
 import sys
 import os
-sys.path.append(os.path.join(os.path.dirname(__file__), '..', 'datasets'))
-sys.path.append(os.path.join(os.path.dirname(__file__), '..', 'model'))
+sys.path.append(os.path.join(os.path.dirname(__file__), '..', 'src'))
 from sql_generator import SQL_gen
 from translator import TextTranslator
 from make_prompt import MakePrompt
@@ -24,7 +23,7 @@ class Pipeline():
         self.query = None
     
 
-    def query_markdown(self, 
+    def _query_markdown(self, 
             query):
         prompt_sql = self.make_prompt.make_prompt_query_sql()
         chain_sql = prompt_sql | self.llm | StrOutputParser()
@@ -38,7 +37,7 @@ class Pipeline():
         return markdown
 
 
-    def rawquery_query(self, query):
+    def _rawquery_query(self, query):
         translated_query = self.translator.translate_text_to_eng(query)
         self.query = translated_query
         prompt_llm = self.make_prompt.make_prompt_rawquery_query()
@@ -50,7 +49,7 @@ class Pipeline():
         return llm_output_parsed
     
 
-    def markdownquery_answer(self, markdown):
+    def _markdownquery_answer(self, markdown):
         prompt = self.make_prompt.make_prompt_markdownquery_answer()
 
         chain = prompt | self.llm | StrOutputParser()
@@ -60,8 +59,8 @@ class Pipeline():
     
 
     def run(self, input):
-        query = self.rawquery_query(input)
-        markdown = self.query_markdown(query)
-        answer = self.markdownquery_answer(markdown)
+        query = self._rawquery_query(input)
+        markdown = self._query_markdown(query)
+        answer = self._markdownquery_answer(markdown)
 
         return answer

@@ -1,18 +1,19 @@
 from transformers import T5Tokenizer, T5ForConditionalGeneration
+from config import config
 
 
 class SQL_gen():
     def __init__(self):
         self.model_name = None
         self.tokenizer = T5Tokenizer.from_pretrained('t5-small', 
-                                                     cache_dir='model/weights')
+                                                     cache_dir=config.weights_dir)
         self.model = None
         self.config = None
 
 
     def connect_model(self,
                       model_name='cssupport/t5-small-awesome-text-to-sql',
-                      cache_dir='model/weights',
+                      cache_dir=config.weights_dir,
                       device_map='auto'):
         
         self.model_name = model_name
