@@ -1,5 +1,5 @@
 *.csv
 *.zip
-/model/weights/
+/weights/
 *.whl
 *.ipynb
